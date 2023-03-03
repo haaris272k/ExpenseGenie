@@ -22,7 +22,7 @@ Simply search for 'ExpenseGenie' on Telegram
 To access ExpenseGenie, search for ‘ExpenseGenie’ on Telegram and start the bot. Use the /start command to register in the database. You will get registered.
 Once registered, you can start using the bot to manage your expenses.
 
-![strt](https://user-images.githubusercontent.com/89451392/222720353-53bc7029-8782-4e2d-bd5c-5920951b9095.png)
+![strt](https://user-images.githubusercontent.com/89451392/222742608-d634bf73-843a-4438-83a6-3fe208fd5302.png)
 
 # Features
 ExpenseGenie provides a range of functionalities to keep track of your expenses.
@@ -36,7 +36,7 @@ Use the /add command to add an expense. The bot will ask you to enter the amount
 Use the /view command to view your expenses. User can view expenses in a well-formatted PDF file
 The PDF file provides a clear and concise overview of your expenses.
 
-![view](https://user-images.githubusercontent.com/89451392/222720427-58bd1c97-f4f0-4100-80f1-60b31fe8ee64.png)
+![view](https://user-images.githubusercontent.com/89451392/222742393-14c48290-b2fd-4019-823f-590a8e4ab697.png)
 
 ![view pdf](https://user-images.githubusercontent.com/89451392/222720455-ec358a8a-dda1-4a3a-97e0-4618bdee0335.png)
 
@@ -48,7 +48,7 @@ Use the /total command to view the total of your' overall expenses' or of 'the c
 # Deleting Expenses
 Use the /delete command to delete a specific expense or all the expenses in the database. You can choose to delete a specific entry by providing the id associated to that expense. You can use/view command to refer to the id.
 
-![delete](https://user-images.githubusercontent.com/89451392/222720501-ce46bfb3-0cc3-4ca4-b5a2-5c067f8ffa35.png)
+![delete](https://user-images.githubusercontent.com/89451392/222742124-f61211e4-f72d-4623-9ea7-7627d6ffa61c.png)
 
 # Using Initial Letters
 You can use the initial letters of the commands for faster access. For example, /s for /start, /a for /add, /v for /view, and so on.
