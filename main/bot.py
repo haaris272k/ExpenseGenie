@@ -14,6 +14,23 @@ BOT_TOKEN = "bot_token"
 bot = telebot.TeleBot(BOT_TOKEN)
 
 
+@bot.message_handler(commands=["help", "h"])
+def help(message):
+            
+        """
+        This function will send the link of documentation to the user.
+    
+        Args:
+            message: The message sent by the user
+    
+        Returns:
+            None
+        """
+        bot.reply_to(
+            message,
+            "You can find the documentation of the bot here : https://github.com/haaris272k/ExpenseGenie/blob/main/README.md. You can get detailed information about the bot and its usage.",
+        )
+
 @bot.message_handler(commands=["list", "l"])
 def list_available_commands(message):
 
@@ -29,9 +46,9 @@ def list_available_commands(message):
     bot.reply_to(
         message,
         "Available commands : \n\n"
-        "/start - To start the bot \n\n /add - To add an expense \n\n /view - To view the expenses \n\n /total - To view the total expense"
+        " /help - To get detailed information \n\n /start - To start the bot \n\n /add - To add an expense \n\n /view - To view the expenses \n\n /total - To view the total expense"
         + "\n\n /delete - To delete an expense or all the expenses"
-        "\n\n (Tip : You can use initial letters of the commands too.\n\n For example, /s for /start, /a for add, and so on.)",
+        "\n\n (Tip : You can use initial letters of the commands too.\n\n For example, /s for /start, /a for /add, and so on.)",
     )
 
 
