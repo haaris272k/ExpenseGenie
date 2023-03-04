@@ -1,6 +1,23 @@
 # ExpenseGenie - Your Personal Expense Manager
 ExpenseGenie aka @BudgetWizardBot is a Telegram bot that helps users manage expenses with ease. It allows adding expenses, viewing expenses in PDF format, finding total expenses, and more. In alpha phase, with more functionalities coming soon. User-friendly interface and efficient features make ExpenseGenie a simple solution for tracking expenses.
 
+# Advantages of ExpenseGenie
+    Accessibility: Unlike applications that require installation and updates, ExpenseGenie is accessible through the Telegram messaging app. This means that users can manage their expenses on the go without having to download a separate application.
+
+    Ease of Use: ExpenseGenie has a simple and user-friendly interface that makes it easy to add and view expenses. Users do not need to spend time learning how to use the application or navigate through complex menus.
+
+    Speed: With ExpenseGenie, users can add and view expenses quickly and efficiently using simple commands.
+    Cost: ExpenseGenie is a free bot that does not require any subscription or payment. Users can manage their expenses without incurring any additional costs.
+
+# Use Case:
+    > Students can use ExpenseGenie to keep track of their monthly allowances and expenses.
+
+    > Professionals can use ExpenseGenie to manage their work-related expenses.
+
+    > Households can use ExpenseGenie to track their household expenses and manage their budget.
+
+    > Anyone who wants to keep track of their expenses can use ExpenseGenie.
+
 Table of Contents
 
     - Getting Started
@@ -25,7 +42,11 @@ Once registered, you can start using the bot to manage your expenses.
 ![strt](https://user-images.githubusercontent.com/89451392/222742608-d634bf73-843a-4438-83a6-3fe208fd5302.png)
 
 # Features
-ExpenseGenie provides a range of functionalities to keep track of your expenses.
+    > Add expenses easily using the /add command and keep track of your spending.
+    > View all your expenses in a well-formatted PDF file using the /view command.
+    > Calculate the total of your overall expenses or of the current month with the /total command.
+    > Delete specific expenses or all the expenses in the database with the /delete command.
+    > Use the initial letters of the commands for faster access.
 
 # Adding an Expense
 Use the /add command to add an expense. The bot will ask you to enter the amount, and tag of the expense. The tag can be anything that helps you identify the expense, such as "Food," "Entertainment," or "Travel."
