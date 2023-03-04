@@ -48,7 +48,8 @@ def list_available_commands(message):
     bot.reply_to(
         message,
         "Available commands : \n\n"
-        " /help - To get detailed information \n\n /start - To start the bot \n\n /add - To add an expense \n\n /view - To view the expenses \n\n /total - To view the total expense"
+        " /help - To get detailed information \n\n /start - To start the bot \n\n /add - To add an expense \n\n"
+        " /view - To view the expenses \n\n /total - To view the total expense"
         + "\n\n /delete - To delete an expense or all the expenses"
         "\n\n (Tip : You can use initial letters of the commands too.\n\n For example, /s for /start, /a for /add, and so on.)",
     )
@@ -178,7 +179,8 @@ def add_expense(message):
         bot.send_animation(
             message.chat.id,
             "https://media.giphy.com/media/JT7Td5xRqkvHQvTdEu/giphy.gif",
-            caption="Sorry, I didn't understand your input or you may have entered the command without replying to the previous message. Please try again with a valid command.",
+            caption="Sorry, I didn't understand your input or you may have entered the command without replying to the previous message."
+            " Please try again with a valid command.",
         )
 
 
@@ -216,7 +218,8 @@ def get_expense(message, dbobj, username, user_id):
         bot.send_animation(
             message.chat.id,
             "https://media.giphy.com/media/JT7Td5xRqkvHQvTdEu/giphy.gif",
-            caption="Sorry, I didn't understand your input or you may have entered the command without replying to the previous message. Please try again with a valid command.",
+            caption="Sorry, I didn't understand your input or you may have entered the command without replying to the previous message."
+            " Please try again with a valid command.",
         )
 
 
@@ -496,7 +499,8 @@ def delete_expense(message):
     # Asking user to enter the choice
     bot.reply_to(
         message,
-        f"Please enter the choice. \n\n 1. Delete all expenses \n\n 2. Delete a specific expense. \n\n <b>Warning: Action once done cannot be undone❗</b>",
+        f"Please enter the choice. \n\n 1. Delete all expenses \n\n 2. Delete a specific expense. \n\n"
+        " <b>Warning: Action once done cannot be undone❗</b>",
         parse_mode="HTML",
     )
 
@@ -649,3 +653,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
