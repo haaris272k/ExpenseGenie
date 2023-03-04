@@ -16,20 +16,22 @@ bot = telebot.TeleBot(BOT_TOKEN)
 
 @bot.message_handler(commands=["help", "h"])
 def help(message):
-            
-        """
-        This function will send the link of documentation to the user.
-    
-        Args:
-            message: The message sent by the user
-    
-        Returns:
-            None
-        """
-        bot.reply_to(
-            message,
-            "You can find the documentation of the bot here : https://github.com/haaris272k/ExpenseGenie/blob/main/README.md. You can get detailed information about the bot and its usage.",
-        )
+
+    """
+    This function will send the link of documentation to the user.
+
+    Args:
+        message: The message sent by the user
+
+    Returns:
+        None
+    """
+    bot.reply_to(
+        message,
+        "You can find the documentation of the bot here : https://github.com/haaris272k/ExpenseGenie/blob/main/README.md."
+        " You can get detailed information about the bot and its usage.",
+    )
+
 
 @bot.message_handler(commands=["list", "l"])
 def list_available_commands(message):
@@ -73,35 +75,39 @@ def start(message):
         # Connecting to the database
         dbobj.connect_database()
 
-        # Getting username
-        # Handling the case when the user has not set a username in the telegram account
-        try:
+        # Getting user name
+        username = message.from_user.username
 
-            # Getting username
-            username = message.from_user.username
-
-        except:
+        # checking if username is None then send the message to the user to immediately set the username in the telegram account
+        if username is None:
 
             # Sending the message to the user
             bot.reply_to(
                 message,
-                "It looks like you have not set a username in your telegram account. Please set a username in the settings section of your telegram account and then enter the /start command again.",
+                "<b>Important❗</b>"
+                "\n\nIt looks like you have not set a <b>username</b> in your telegram account."
+                " Please set a username in the <b>settings</b> section of your telegram account and then enter the /start command again."
+                "\n\nFYI, Username is different from the display name."
+                " Username is the one which is shown after the @ symbol in your telegram account.",
+                parse_mode="HTML",
             )
-
             # Exiting the function
             return
 
         # Replying to the user
         bot.reply_to(
             message,
-            f"Good to see you, {username}. With the BudgetWizardBot , you can easily keep track of all your expenses. \n\nYou will be registered automatically if you are not registered. Feel free to use /list command to see all the available commands.",
+            f"Good to see you, {username}. With the BudgetWizardBot , you can easily keep track of all your expenses."
+            " You will be registered automatically if you are not registered. Feel free to use /list command to see all the available commands.",
         )
 
         # Wait
         time.sleep(0.5)
 
         # Checking if the user is already registered or not
-        if dbobj.collection.find_one({"username": username}):
+        if dbobj.collection.find_one(
+            {"username": username}
+        ):
 
             bot.reply_to(
                 message,
@@ -112,7 +118,8 @@ def start(message):
 
             bot.reply_to(
                 message,
-                "You were not registered, so I have automatically registered you. Please remember your username and user ID.",
+                "You were not registered, so I have automatically registered you."
+                " Please remember your username and don't change it in the future.",
             )
 
     except:
@@ -141,6 +148,21 @@ def add_expense(message):
 
         # Getting username
         username = message.from_user.username
+
+        # checking if username is None then send the message to the user to immediately set the username in the telegram account
+        if username is None:
+
+            # Sending the message to the user
+            bot.reply_to(
+                message,
+                "<b>Important❗</b>"
+                "\n\nIt looks like you have not set a username in your telegram account even after the reminder."
+                " Therefore, you were not registered and no data is available for you."
+                " Please set a username in the settings section of your telegram as notifed earlier to, further use the bot.",
+                parse_mode="HTML",
+            )
+            # Exiting the function
+            return
 
         # Getting user ID
         user_id = message.from_user.id
@@ -287,15 +309,29 @@ def view_expense(message):
     # Getting the data from the database
     data = dboj.collection.find(query)
 
-    # Using generate pdf function to generate the pdf and sending it to the user
-    generate_pdf(data, username)
+    # Checking if user has set the username in the telegram account
+    if username is None:
 
-    # Sending the pdf to the user
-    with open(f"{username}.pdf", "rb") as pdf:
-        bot.send_document(message.chat.id, pdf)
+        # Sending the message to the user
+        bot.reply_to(
+            message,
+            "<b>Important❗</b>"
+            "\n\nIt looks like you have not set a username in your telegram account even after the reminder."
+            " Therefore, you were not registered and no data is available for you."
+            " Please set a username in the settings section of your telegram as notifed earlier to, further use the bot.",
+            parse_mode="HTML",
+        )
 
-    # Deleting the pdf from the server
-    os.remove(f"{username}.pdf")
+    else:
+        # Using generate pdf function to generate the pdf and sending it to the user
+        generate_pdf(data, username)
+
+        # Sending the pdf to the user
+        with open(f"{username}.pdf", "rb") as pdf:
+            bot.send_document(message.chat.id, pdf)
+
+        # Deleting the pdf from the server
+        os.remove(f"{username}.pdf")
 
 
 @bot.message_handler(commands=["total", "t"])
@@ -348,71 +384,85 @@ def get_choice(message, dbobj, username, user_id):
         None
     """
     try:
-        # Getting the choice from the user
-        choice = message.text
+        # Checking if the user has set a username or not
+        if username is None:
 
-        # Checking if the choice is valid or not
-        if choice not in ["1", "2"]:
+            # Sending the message to the user
             bot.reply_to(
                 message,
-                "Invalid choice. Please re-enter the command and enter a valid choice.",
-            )
-            return
-
-        # Getting the current month
-        current_month = datetime.now().strftime("%m")
-
-        # Getting the current year
-        current_year = datetime.now().strftime("%Y")
-
-        # Getting the data from the database
-        query = {"username": username, "u_id": user_id}
-
-        # Getting the data from the database
-        data = dbobj.collection.find(query)
-
-        # Total expense
-        total_expense = 0
-
-        # Checking if the choice is 1 or 2
-        if choice == "1":
-
-            # Iterating over the data
-            for i in data:
-
-                # Adding the expense to the total expense
-                total_expense += int(i["expense"])
-
-            # Sending the total expense to the user
-            bot.reply_to(
-                message,
-                f"Your overall total expense is <b>{total_expense}</b>",
+                "<b>Important❗</b>"
+                "\n\nIt looks like you have not set a username in your telegram account even after the reminder."
+                " Therefore, you were not registered and no data is available for you."
+                " Please set a username in the settings section of your telegram as notifed earlier to, further use the bot.",
                 parse_mode="HTML",
             )
 
         else:
+            # Getting the choice from the user
+            choice = message.text
 
-            # Iterating over the data
-            for i in data:
+            # Checking if the choice is valid or not
+            if choice not in ["1", "2"]:
+                bot.reply_to(
+                    message,
+                    "Invalid choice. Please re-enter the command and enter a valid choice.",
+                )
+                return
 
-                # Getting the month from the timestamp
-                month = i["timestamp"].split("-")[1]
+            # Getting the current month
+            current_month = datetime.now().strftime("%m")
 
-                # Getting the year from the timestamp
-                year = i["timestamp"].split("-")[2].split(" ")[0]
+            # Getting the current year
+            current_year = datetime.now().strftime("%Y")
 
-                # Checking if the month and year is same as the current month and year
-                if month == current_month and year == current_year:
+            # Getting the data from the database
+            query = {"username": username, "u_id": user_id}
+
+            # Getting the data from the database
+            data = dbobj.collection.find(query)
+
+            # Total expense
+            total_expense = 0
+
+            # Checking if the choice is 1 or 2
+            if choice == "1":
+
+                # Iterating over the data
+                for i in data:
 
                     # Adding the expense to the total expense
                     total_expense += int(i["expense"])
 
-            # Sending the total expense to the user
-            bot.reply_to(
-                message,
-                f"Your total expense for this month is <b>{total_expense}</b>",
-                parse_mode="HTML",
-            )
+                # Sending the total expense to the user
+                bot.reply_to(
+                    message,
+                    f"Your overall total expense is <b>{total_expense}</b>",
+                    parse_mode="HTML",
+                )
+
+            else:
+
+                # Iterating over the data
+                for i in data:
+
+                    # Getting the month from the timestamp
+                    month = i["timestamp"].split("-")[1]
+
+                    # Getting the year from the timestamp
+                    year = i["timestamp"].split("-")[2].split(" ")[0]
+
+                    # Checking if the month and year is same as the current month and year
+                    if month == current_month and year == current_year:
+
+                        # Adding the expense to the total expense
+                        total_expense += int(i["expense"])
+
+                # Sending the total expense to the user
+                bot.reply_to(
+                    message,
+                    f"Your total expense for this month is <b>{total_expense}</b>",
+                    parse_mode="HTML",
+                )
 
     except:
         bot.reply_to(message, "There was some error.")
@@ -469,41 +519,59 @@ def get_delete_choice(message, dbobj, username, user_id):
         None
     """
     try:
-        # Getting the choice from the user
-        choice = message.text
 
-        # Checking if the choice is valid or not
-        if choice not in ["1", "2"]:
+        if username is None:
+
+            # Sending the message to the user
             bot.reply_to(
                 message,
-                "Invalid choice. Please re-enter the command and enter a valid choice.",
+                "<b>Important❗</b>"
+                "\n\nIt looks like you have not set a username in your telegram account even after the reminder."
+                " Therefore, you were not registered and no data is available for you."
+                " Please set a username in the settings section of your telegram as notifed earlier to, further use the bot.",
+                parse_mode="HTML",
             )
-            return
-
-        # Checking if the choice is 1 or 2
-        if choice == "1":
-
-            # Deleting all the expenses of the user
-            query = {"username": username, "u_id": user_id}
-            dbobj.collection.delete_many(query)
-
-            # Sending the confirmation message to the user
-            bot.reply_to(message, "All the expenses have been deleted successfully!")
 
         else:
+            # Getting the choice from the user
+            choice = message.text
 
-            # Asking the user to enter the id of the expense that he wants to delete
-            bot.reply_to(
-                message,
-                "Please enter the id of the expense that you want to delete. I will send your expense data for reference.",
-            )
+            # Checking if the choice is valid or not
+            if choice not in ["1", "2"]:
+                bot.reply_to(
+                    message,
+                    "Invalid choice. Please re-enter the command and enter a valid choice.",
+                )
+                return
 
-            time.sleep(1)
+            # Checking if the choice is 1 or 2
+            if choice == "1":
 
-            view_expense(message)
+                # Deleting all the expenses of the user
+                query = {"username": username, "u_id": user_id}
+                dbobj.collection.delete_many(query)
 
-            # Waiting for the user to enter the id
-            bot.register_next_step_handler(message, get_id, dbobj, username, user_id)
+                # Sending the confirmation message to the user
+                bot.reply_to(
+                    message, "All the expenses have been deleted successfully!"
+                )
+
+            else:
+
+                # Asking the user to enter the id of the expense that he wants to delete
+                bot.reply_to(
+                    message,
+                    "Please enter the id of the expense that you want to delete. I will send your expense data for reference.",
+                )
+
+                time.sleep(1)
+
+                view_expense(message)
+
+                # Waiting for the user to enter the id
+                bot.register_next_step_handler(
+                    message, get_id, dbobj, username, user_id
+                )
 
     except:
         bot.reply_to(message, "There was some error.")
@@ -566,5 +634,18 @@ def invalid_input(message):
     )
 
 
+def main():
+
+    """
+    This function will run the bot
+    Args:
+        None
+    Returns:
+        None
+    """
+    # Running the bot
+    bot.infinity_polling()
+
+
 if __name__ == "__main__":
-    bot.polling()
+    main()
