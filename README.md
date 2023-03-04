@@ -2,12 +2,15 @@
 ExpenseGenie aka @BudgetWizardBot is a Telegram bot that helps users manage expenses with ease. It allows adding expenses, viewing expenses in PDF format, finding total expenses, and more. In alpha phase, with more functionalities coming soon. User-friendly interface and efficient features make ExpenseGenie a simple solution for tracking expenses.
 
 # Advantages of ExpenseGenie
-    Accessibility: Unlike applications that require installation and updates, ExpenseGenie is accessible through the Telegram messaging app. This means that users can manage their expenses on the go without having to download a separate application.
+    > Accessibility: Unlike applications that require installation and updates, ExpenseGenie is accessible through the Telegram messaging app.
 
-    Ease of Use: ExpenseGenie has a simple and user-friendly interface that makes it easy to add and view expenses. Users do not need to spend time learning how to use the application or navigate through complex menus.
+    > Space: Users can manage their expenses on the go without having to download a separate application thereby saving space on their devices.
 
-    Speed: With ExpenseGenie, users can add and view expenses quickly and efficiently using simple commands.
-    Cost: ExpenseGenie is a free bot that does not require any subscription or payment. Users can manage their expenses without incurring any additional costs.
+    > Ease of Use: ExpenseGenie has a simple and user-friendly interface that makes it easy to add and view expenses.
+
+    > Speed: With ExpenseGenie, users can add and view expenses quickly and efficiently using simple commands.
+
+    > Cost: ExpenseGenie is a free bot that does not require any subscription or payment. Users can manage their expenses without incurring any additional costs.
 
 # Use Case:
     > Students can use ExpenseGenie to keep track of their monthly allowances and expenses.
