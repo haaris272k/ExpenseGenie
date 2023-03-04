@@ -74,9 +74,5 @@ class DatabaseHandlers:
             return "Connection closed successfully!"
 
         except:
-            return "Error closing connection!"
-
-
-if __name__ == "__main__":
-    dbobj = DatabaseHandlers()
- 
+            return "Error closing connection!" 
+        
