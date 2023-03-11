@@ -11,13 +11,12 @@ def generate_pdf(data, filename):
     This function generates a PDF file from the data provided.
 
     Args:
-        data: The data to be added to the PDF file
+        data: The data to be added to the PDF file and the filename of the PDF file.
 
     Returns:
         None
 
     """
-
     # Create a list of lists to hold the table data
     table_data = [["ID", "Expense", "Tag", "Timestamp"]]
 

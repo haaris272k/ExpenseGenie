@@ -621,12 +621,13 @@ def get_id(message, dbobj, username, user_id):
 def invalid_input(message):
 
     """
-    function to handle invalid input
+    function to handle invalid 
+    
     Args:
         message (str): message sent by the user
+
     Returns:
         None
-
     """
     # sending 'invalid input!' message to the user along with the gif
     bot.send_animation(
@@ -644,6 +645,7 @@ def main():
     This function will run the bot
     Args:
         None
+
     Returns:
         None
     """

@@ -10,7 +10,6 @@ close_database method is used to close the connection to the database.
 
 """
 
-
 class DatabaseHandlers:
     def __init__(self) -> None:
 
@@ -18,11 +17,10 @@ class DatabaseHandlers:
         This function is used to initialize the class variables.
 
         Args:
-            None
+            An instance of the class.
 
         Returns:
             None
-
         """
         # reading the username and password from the file and storing it in the class variables
         with open("credential.txt", "r") as f:
@@ -41,11 +39,10 @@ class DatabaseHandlers:
         This function is used to connect to the database, create a database and create a collection.
 
         Args:
-            None
+            An instance of the class.
 
         Returns:
-            None
-
+            A string which indicates whether the connection to the database was successful or not.
         """
         # Connecting to the database
         try:
@@ -62,11 +59,10 @@ class DatabaseHandlers:
         This function is used to close the connection to the database.
 
         Args:
-            None
+            An instance of the class.
 
         Returns:
-            None
-
+            A string which indicates whether the connection to the database was closed successfully or not.
         """
         # Closing the connection to the database
         try:
