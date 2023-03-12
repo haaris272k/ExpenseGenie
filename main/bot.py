@@ -1,7 +1,7 @@
 # imports
 from datetime import datetime
-from database_handler import DatabaseHandlers
-from pdf_generator import generate_pdf
+from HelperScripts.pdf_generator import generate_pdf
+from HelperScripts.database_handler import DatabaseHandlers
 import os
 import re
 import time
