@@ -1,4 +1,9 @@
 # ExpenseGenie - Your Personal Expense Manager
+
+[![ExpenseGenie](https://img.shields.io/badge/ExpenseGenie-blue?style=flat-square&logo=github&logoColor=white)](https://github.com/haaris272k/ExpenseGenie/)
+[![GitHub stars](https://img.shields.io/github/stars/haaris272k/ExpenseGenie.svg?style=social&label=Stars&color=blue)](https://github.com/haaris272k/ExpenseGenie/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/haaris272k/ExpenseGenie.svg?style=social&label=Forks&color=green)](https://github.com/haaris272k/ExpenseGenie/network)
+
 ExpenseGenie aka @BudgetWizardBot is a Telegram bot that helps users manage expenses with ease. It allows adding expenses, viewing expenses in PDF format, finding total expenses, and more. In alpha phase, with more functionalities coming soon. User-friendly interface and efficient features make ExpenseGenie a simple solution for tracking expenses.
 
 # Advantages of ExpenseGenie
